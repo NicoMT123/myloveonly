@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Message</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: #006400;             display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+      
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #32CD32; 
+            clip-path: polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%, 50% 0%);
+            transform: rotate(45deg);
+            animation: float 15s ease-in-out infinite;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+      
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-100px) scale(1.2); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+       
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .message-box {
+            background: rgba(0, 0, 0, 0.7); 
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            position: relative;
+        }
+
+        .message-box h1 {
+            font-size: 2.5em;
+            color: #fff;
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 2px 2px 10px rgba(0, 255, 0, 0.8);
+        }
+
+        .message-box p {
+            font-size: 1.2em;
+            color: #e0ffe0;
+            line-height: 1.6;
+            font-family: 'Georgia', serif;
+            margin-top: 20px;
+        }
+
+        /* Subtle Fade-In for overlay */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    
+    <div class="heart" style="top: 10%; left: 20%;"></div>
+    <div class="heart" style="top: 30%; left: 50%;"></div>
+    <div class="heart" style="top: 70%; left: 70%;"></div>
+
+
+    <div class="overlay">
+        <div class="message-box">
+            <h1>My Love,</h1>
+            <p>Hi my love of ma layp 👋
+
+I'm writing this letter for you and only you, my bootiful gf 🫵 
+
+I just want to say, thank you so soo sooo much for being my girlfriend. Thank you for trusting me as your boyfriend. I know how people can be untrustworthy these days, but you still trusted me, and I’ll make sure not to disappoint you.
+
+It’s crazy how long it’s been since I confessed to you. Time really flies and it feels like pag last month rako ni confess. I guess we didn’t care much about time because we were just focused on each other and our relationship. It’s crazyy to think that if I didn’t confess, none of this would’ve happened. But I’m so thankful to God for giving me the courage back then.
+And just so you know, wel, before all this, back in our SHS days, I was secretly admiring you from afar. I thought about you all the time, and it actually motivated me to go to school every day just to see you. Just catching a glimpse of you was enough to make my day.
+
+What’s crazy is that sa ako mga friends knew nothing about this. They all just thought I was just a nonchalant guy, always joking around and focused on school. None of them ever guessed that I could actually catch feelings too. Pero look at us now, loving each other. Sa tinuod lang wel, I never thought this would happen, but I’m really glad it did.
+
+I'm so grateful and thankful that i have found a girl like you, all those courage that i build up to confess to you has really paid off. Being your boyfriend is so nice to think. It's just so crazy how i got a girl like you, pretty, bootiful, mesmerizing, and high standards 😲 Para akong pinagpalang rambutan nito.
+
+I love you, I love you so much, I love you very much, I love you so soo much, and I love you so much more. 💚🌹</p>
+        </div>
+    </div>
+
+    <script>
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+           
+            const size = Math.random() * 40 + 30;
+            const xPosition = Math.random() * window.innerWidth;
+            const yPosition = Math.random() * window.innerHeight;
+
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            heart.style.left = `${xPosition}px`;
+            heart.style.top = `${yPosition}px`;
+
+            document.body.appendChild(heart);
+
+         
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+
+       
+        setInterval(createHeart, 1000);
+    </script>
+</body>
+</html>

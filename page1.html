@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Message</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #6a1b9a, #9c27b0); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+       
+        .star {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: sparkle 1.5s infinite alternate;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: translate(0, 0); }
+            100% { opacity: 1; transform: translate(80px, 80px); }
+        }
+
+       
+        .heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #9b59b6; 
+            clip-path: polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%, 50% 0%);
+            transform: rotate(45deg);
+            animation: float 12s ease-in-out infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-100px) scale(1.2); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        /* Message Box */
+        .message-box {
+            background: rgba(255, 255, 255, 0.7); 
+            padding: 60px;
+            max-width: 600px;
+            width: 85%;
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .message-box h1 {
+            font-size: 3em;
+            color: #800080; /* Deep Purple Text */
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .message-box p {
+            font-size: 1.5em;
+            color: #4b0082; /* Indigo Text */
+            line-height: 1.8;
+            margin-top: 20px;
+            font-family: 'Georgia', serif;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Floating Hearts -->
+    <div class="heart" style="top: 10%; left: 15%;"></div>
+    <div class="heart" style="top: 30%; left: 50%;"></div>
+    <div class="heart" style="top: 50%; left: 75%;"></div>
+    <div class="heart" style="top: 80%; left: 30%;"></div>
+
+    <!-- Sparkles -->
+    <div class="star" style="top: 5%; left: 10%;"></div>
+    <div class="star" style="top: 20%; left: 40%;"></div>
+    <div class="star" style="top: 60%; left: 70%;"></div>
+    <div class="star" style="top: 90%; left: 50%;"></div>
+
+    <!-- Message Box -->
+    <div class="message-box">
+        <h1>To My Baby Girl💜</h1>
+        <p>Another month has passed by, my love, and I’m still so in love with you. Thank you for being by my side, for being the cutie patotie, mesmerizing, bootiful, gwapa, maganda, hot n spicy, extra chili, and magnificent that you are. Sayo na lahat ang kagandahan. I feel so blessed and grateful. Thank you, Lord.🌹</p>
+    </div>
+
+    <script>
+  
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+            // Randomize position
+            const size = Math.random() * 50 + 30;
+            const xPosition = Math.random() * window.innerWidth;
+            const yPosition = Math.random() * window.innerHeight;
+
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            heart.style.left = `${xPosition}px`;
+            heart.style.top = `${yPosition}px`;
+
+            document.body.appendChild(heart);
+
+         
+            setTimeout(() => {
+                heart.remove();
+            }, 12000);
+        }
+
+     
+        setInterval(createHeart, 1000);
+    </script>
+
+</body>
+</html>

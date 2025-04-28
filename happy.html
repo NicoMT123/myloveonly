@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICTURES</title>
+    <style>
+     
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: darkgreen;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+       
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+     
+        .bouquet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .bouquet p {
+            color: white;
+            font-size: 45px;
+            text-align: center;
+            color: green;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .left-side, .right-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .image-box {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 50px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .image-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .description {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <canvas id="backgroundCanvas"></canvas>
+
+   <div class="container">
+    <div class="image-box">
+        <a href="page1.html">
+            <img src="picture1.jpg" alt="Image 1">
+        </a>
+        <p class="description">MESSAGE 1</p>
+    </div>
+    <div class="image-box">
+        <a href="page2.html">
+            <img src="picture2.jpg" alt="Image 2">
+        </a>
+        <p class="description">MESSAGE 2</p>
+    </div>
+    <div class="image-box">
+        <a href="page3.html">
+            <img src="picture3.jpg" alt="Image 3">
+        </a>
+        <p class="description">MESSAGE 3</p>
+    </div>
+    <div class="image-box">
+        <a href="page4.html">
+            <img src="picture4.jpg" alt="Image 4">
+        </a>
+        <p class="description">MESSAGE 4</p>
+    </div>
+    <div class="image-box">
+        <a href="page5.html">
+            <img src="picture5.jpg" alt="Image 5">
+        </a>
+        <p class="description">MESSAGE 5</p>
+    </div>
+    <div class="image-box">
+        <a href="page6.html">
+            <img src="picture6.jpg" alt="Image 6">
+        </a>
+        <p class="description">MESSAGE 6</p>
+    </div>
+</div>
+
+
+
+    <script>
+   
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+    
+        let hearts = [];
+
+        function createHeart() {
+            const x = Math.random() * canvas.width;
+            const size = Math.random() * 5 + 5;
+            const speed = Math.random() * 2 + 1;
+            const color = Math.random() < 0.5 ? '#ff0000' : '#006400'; 
+
+            hearts.push({ x, y: 0, size, speed, color });
+        }
+
+        function updateHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            hearts.forEach((heart, index) => {
+                
+                ctx.beginPath();
+                ctx.arc(heart.x, heart.y, heart.size, Math.PI, 0);
+                ctx.arc(heart.x + heart.size * 2, heart.y, heart.size, Math.PI, 0);
+                ctx.lineTo(heart.x + heart.size, heart.y + heart.size * 2);
+                ctx.closePath();
+                ctx.fillStyle = heart.color;
+                ctx.fill();
+
+                
+                heart.y += heart.speed;
+
+                
+                if (heart.y > canvas.height) {
+                    hearts.splice(index, 1);
+                }
+            });
+        }
+
+        function gameLoop() {
+            createHeart();
+            updateHearts();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+
+    </script>
+<style type="text/css">
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: limegreen; 
+    position: relative;
+    z-index: 1; 
+}
+
+#backgroundCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0; 
+}
+
+.container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 100px; 
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    flex-wrap: wrap;
+}
+
+
+.left-side, .right-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.image-box {
+    width: 300px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px; 
+    transition: transform 0.3s ease;
+}
+
+.image-box img {
+    width: 80%;
+    height: 350px;
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+.image-box:hover {
+    transform: scale(1.05);
+}
+
+.description {
+    font-size: 16px;
+    color: darkgreen;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2); 
+    padding: 8px 12px;
+    border-radius: 12px;
+}
+
+
+</style>
+</body>
+</html>

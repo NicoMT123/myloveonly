@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Message</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: #FFEB3B; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            color: #FFF;
+            position: relative;
+            overflow: hidden;
+        }
+
+     
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: #FFD700; 
+            border-radius: 50%;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { opacity: 0; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-200px) scale(1.5); }
+            100% { opacity: 0; transform: translateY(0); }
+        }
+
+       
+        .message-box {
+            background: rgba(255, 255, 255, 0.8); 
+            padding: 50px;
+            max-width: 600px;
+            width: 85%;
+            border-radius: 25px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .message-box h1 {
+            font-size: 3em;
+            color: #FF6F00; 
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .message-box p {
+            font-size: 1.5em;
+            color: #FF8C00;
+            line-height: 1.8;
+            margin-top: 20px;
+            font-family: 'Georgia', serif;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div class="particle" style="top: 10%; left: 10%;"></div>
+    <div class="particle" style="top: 40%; left: 25%;"></div>
+    <div class="particle" style="top: 60%; left: 50%;"></div>
+    <div class="particle" style="top: 80%; left: 70%;"></div>
+
+   
+    <div class="message-box">
+        <h1>💛</h1>
+        <p>I have nothing more to say, sorry. Pero I just want you to know that I love you so so much. Thank you for accepting me as your boyfriend, because of you, my life has been so much better and happier. I have someone to spend time with, someone I can talk to every day, someone who appreciates and loves me for who I am, someone who loves me unconditionally, someone to rant to, and someone who never judges.
+
+Thank you so much, love. I’m so much happier now. I’ll forever be grateful for you and forever blessed that you came into my life. Without you, I don’t even know what I’d be doing today. Thank you so much for existing, for making me motivated every day.
+
+What I’m praying for is that I hope I’m loving you the way you want to be loved, and I hope I’m making you as happy as you make me. I love you, baby. Sorry sometimes kay sipat ko and making you mad. I’m sorry for that.
+
+And I guess that’s all, this is the last message for this HTML. If you're still awake and reading this, wow, nag-puyat na naman! Grabe naman. Let’s sleep na. Mwamwa, I love you so so much! 🌟</p>
+    </div>
+
+    <script>
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+          
+            const size = Math.random() * 6 + 4;
+            const xPosition = Math.random() * window.innerWidth;
+            const yPosition = Math.random() * window.innerHeight;
+
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${xPosition}px`;
+            particle.style.top = `${yPosition}px`;
+
+            document.body.appendChild(particle);
+
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 3000);
+        }
+
+       
+        setInterval(createParticle, 500);
+    </script>
+
+</body>
+</html>

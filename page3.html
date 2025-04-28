@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Message</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #8B0000, #B22222); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+     
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: rgba(255, 215, 0, 0.8);
+            border-radius: 50%;
+            animation: sparkle 1.5s infinite alternate;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: translate(0, 0); }
+            100% { opacity: 1; transform: translate(100px, 100px); }
+        }
+
+      
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: red; 
+            clip-path: polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%, 50% 0%);
+            transform: rotate(45deg);
+            animation: float 15s ease-in-out infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-100px) scale(1.2); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+     
+        .message-box {
+            background: rgba(255, 0, 0, 0.7); 
+            padding: 50px;
+            max-width: 600px;
+            width: 80%;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+        }
+
+        .message-box h1 {
+            font-size: 3em;
+            color: #FFD700; /* Golden Text */
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .message-box p {
+            font-size: 1.5em;
+            color: #FFFAF0;
+            line-height: 1.8;
+            margin-top: 20px;
+            font-family: 'Georgia', serif;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div class="heart" style="top: 10%; left: 15%;"></div>
+    <div class="heart" style="top: 30%; left: 50%;"></div>
+    <div class="heart" style="top: 50%; left: 75%;"></div>
+    <div class="heart" style="top: 80%; left: 30%;"></div>
+
+ 
+    <div class="sparkle" style="top: 5%; left: 10%;"></div>
+    <div class="sparkle" style="top: 20%; left: 40%;"></div>
+    <div class="sparkle" style="top: 60%; left: 70%;"></div>
+    <div class="sparkle" style="top: 90%; left: 50%;"></div>
+
+
+    <div class="message-box">
+        <h1>For My One and Only ❤️</h1>
+        <p>Hi love, 5 months na pala and everything is going so so so well! Our relationship is just perfect, nothing's going wrong, and I really hope we’ll stay like this in the future. Thank you so so so much for being with me! I love you! ❤️ 🌹</p>
+    </div>
+
+    <script>
+     
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+         
+            const size = Math.random() * 40 + 30;
+            const xPosition = Math.random() * window.innerWidth;
+            const yPosition = Math.random() * window.innerHeight;
+
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            heart.style.left = `${xPosition}px`;
+            heart.style.top = `${yPosition}px`;
+
+            document.body.appendChild(heart);
+
+     
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+
+      
+        setInterval(createHeart, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catch the Hearts 💖</title>
+    <link rel="stylesheet" href="birth.css">
+</head>
+<body>
+    <h1>Catch the Hearts! 💖</h1>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let basket = { x: 160, y: 550, width: 80, height: 30, speed: 5 };
+    let hearts = [];
+    let score = 0;
+    let gameOver = false;
+    let bouncingTextActive = false;
+
+    let keys = {};
+
+    let text = "HAPPY BIRTHDAY\nCLICK ME";
+    let textX = 50;
+    let textY = 50;
+    let textDX = 2;
+    let textDY = 2;
+    let textWidth = 0;
+    let textHeight = 0;
+
+    document.addEventListener("keydown", (e) => {
+        keys[e.key] = true;
+    });
+
+    document.addEventListener("keyup", (e) => {
+        keys[e.key] = false;
+    });
+
+    function moveBasket() {
+        if ((keys["ArrowLeft"] || keys["a"] || keys["A"]) && basket.x > 0) {
+            basket.x -= basket.speed;
+        }
+        if ((keys["ArrowRight"] || keys["d"] || keys["D"]) && basket.x < canvas.width - basket.width) {
+            basket.x += basket.speed;
+        }
+    }
+
+    function drawBasket() {
+        ctx.fillStyle = "#ff69b4";
+        ctx.fillRect(basket.x, basket.y, basket.width, basket.height);
+    }
+
+    function drawHeart(heart) {
+        ctx.beginPath();
+        ctx.fillStyle = "#195905"; 
+        ctx.moveTo(heart.x, heart.y);
+        ctx.arc(heart.x - 5, heart.y, 5, Math.PI, 0);
+        ctx.arc(heart.x + 5, heart.y, 5, Math.PI, 0);
+        ctx.lineTo(heart.x, heart.y + 10);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function createHeart() {
+        const x = Math.random() * (canvas.width - 10) + 5;
+        hearts.push({ x: x, y: 0, speed: 2 + Math.random() * 2 });
+    }
+
+    function updateHearts() {
+        for (let i = 0; i < hearts.length; i++) {
+            hearts[i].y += hearts[i].speed;
+            if (hearts[i].y > canvas.height) {
+                hearts.splice(i, 1);
+                i--;
+            }
+        }
+    }
+
+    function checkCatch() {
+        for (let i = 0; i < hearts.length; i++) {
+            let h = hearts[i];
+            if (h.x > basket.x && h.x < basket.x + basket.width && h.y > basket.y && h.y < basket.y + basket.height) {
+                score++;
+                hearts.splice(i, 1);
+                i--;
+                if (score >= 10) {
+                    startBouncingText();
+                }
+            }
+        }
+    }
+
+    function startBouncingText() {
+        gameOver = true;
+        bouncingTextActive = true;
+    }
+
+    function drawScore() {
+        ctx.fillStyle = "#006400";
+        ctx.font = "20px Comic Sans MS";
+        ctx.fillText("Hearts: " + score, 10, 30);
+    }
+
+    function drawBouncingText() {
+        ctx.fillStyle = "#ff1493";
+        ctx.font = "30px Comic Sans MS";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        let lines = text.split("\n");
+
+        
+        textWidth = 0;
+        lines.forEach((line, index) => {
+            const lineWidth = ctx.measureText(line).width;
+            if (lineWidth > textWidth) textWidth = lineWidth;
+        });
+        textHeight = lines.length * 35;
+
+        
+        lines.forEach((line, index) => {
+            ctx.fillText(line, textX, textY + index * 35);
+        });
+    }
+
+    function updateBouncingText() {
+        textX += textDX;
+        textY += textDY;
+
+        if (textX < 0 || textX > canvas.width) {
+            textDX *= -1;
+        }
+        if (textY < 0 || textY > canvas.height) {
+            textDY *= -1;
+        }
+    }
+
+    
+    canvas.addEventListener("click", (e) => {
+        if (!bouncingTextActive) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        
+        if (
+            mouseX >= textX - textWidth / 2 &&
+            mouseX <= textX + textWidth / 2 &&
+            mouseY >= textY - 20 &&
+            mouseY <= textY + textHeight
+        ) {
+            window.location.href = "happy.html";
+        }
+    });
+
+    function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (bouncingTextActive) {
+            updateBouncingText();
+            drawBouncingText();
+        } else {
+            moveBasket();
+            drawBasket();
+            hearts.forEach(drawHeart);
+            updateHearts();
+            checkCatch();
+            drawScore();
+        }
+
+        requestAnimationFrame(gameLoop);
+    }
+
+    setInterval(() => {
+        if (!gameOver) createHeart();
+    }, 1000);
+
+    gameLoop();
+</script>
+
+</body>
+</html>
